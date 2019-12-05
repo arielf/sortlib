@@ -110,6 +110,55 @@ Array-size cut-off `(CUTOFF)` value is an integer constant for switching from re
     - *sorted.c:* Test routine to verify that an array is sorted.
 
 
+### How To ?
+
+##### Build:
+
+```
+$ make
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c sorttest.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c sorted.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c insort.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c shellsort.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c gamasort.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c quicksort.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c quickersort.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c sedgesort.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c heapsort.c
+ar rv sort.a sorted.o insort.o shellsort.o gamasort.o quicksort.o quickersort.o sedgesort.o heapsort.o
+ar: creating sort.a
+a - sorted.o
+a - insort.o
+a - shellsort.o
+a - gamasort.o
+a - quicksort.o
+a - quickersort.o
+a - sedgesort.o
+a - heapsort.o
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 sorttest.o sort.a -o sorttest -lm
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c bstest.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 -c bsearch.c
+/usr/bin/clang -O3 -fomit-frame-pointer -DCUTOFF=50 bstest.o bsearch.o -o bstest
+```
+
+##### Test:
+
+```
+$ make test
+=== checking sort routines
+Benchmarking & verifying sort funcs on 100000 element array
+insort:           998472 microsec.
+shellsort:         10779 microsec.
+heapsort:           7521 microsec.
+gamasort:           5327 microsec.
+quicksort:          5100 microsec.
+quickersort:        5432 microsec.
+sedgesort:          4486 microsec.
+=== OK
+=== checking binary-search routines
+=== OK
+```
+
 ### Licensing:
 
 This code is released under the [BSD (3 clause) open source licence](https://tldrlegal.com/license/bsd-3-clause-license-(revised)).
